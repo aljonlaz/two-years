@@ -1,0 +1,553 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#fbeff0">
+<style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>2 Years of Us</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Jost:wght@400&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap">
+<style>
+/* Layout: the photo book, page by page, in the same blush love-note look as the anniversary page. A book cover opens, the letter sits in a glowing frame, each month is a chapter with a swipeable strip of photos. Single light look on purpose. */
+:root {
+  --blush: #fbeff0;
+  --petal: #f6d7da;
+  --rose: #c76e7e;
+  --rose-deep: #8f3f52;
+  --ink: #4a2d36;
+  --soft: #9a7680;
+  --paper: #fffaf9;
+  --f-script: "Pinyon Script", "Snell Roundhand", "Apple Chancery", cursive;
+  --f-serif: "Cormorant Garamond", "Garamond", "Iowan Old Style", Georgia, serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: calc(64px + env(safe-area-inset-top, 0px)); }
+body { background: var(--blush); color: var(--ink); font-family: var(--f-serif); font-size: 19px; line-height: 1.6; overflow-x: hidden; }
+.glow { position: fixed; inset: 0; pointer-events: none; z-index: 0;
+  background:
+    radial-gradient(ellipse 60% 45% at 15% 10%, rgba(246,215,218,.95), transparent 70%),
+    radial-gradient(ellipse 55% 45% at 90% 35%, rgba(240,200,210,.7), transparent 70%),
+    radial-gradient(ellipse 70% 50% at 50% 100%, rgba(248,224,214,.9), transparent 70%); }
+#hearts { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
+main { position: relative; z-index: 2; }
+.wrap { max-width: 720px; margin: 0 auto; text-align: center;
+  padding-left: max(20px, env(safe-area-inset-left, 0px)); padding-right: max(20px, env(safe-area-inset-right, 0px)); }
+section { padding-block: 52px; }
+h2 { font-family: var(--f-script); font-weight: 400; font-size: clamp(50px, 13vw, 76px); line-height: 1.1; margin: 0; color: var(--rose-deep); }
+.eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; letter-spacing: .24em; text-transform: uppercase; color: var(--soft); font-variant-numeric: tabular-nums; }
+.eyebrow i { width: 9px; height: 9px; border-radius: 50%; background: var(--dot, var(--rose)); box-shadow: 0 0 0 3px rgba(255,255,255,.7); }
+.story { font-style: italic; color: var(--ink); margin: 10px auto 0; max-width: 34ch; text-wrap: pretty; font-size: 20px; line-height: 1.5; }
+.divider { width: 120px; height: 18px; margin: 0 auto 6px; color: var(--rose); opacity: .7; display: block; }
+
+/* Hero */
+.hero { padding-block: 70px 30px; display: grid; justify-items: center; gap: 8px; }
+.hero .to { font-style: italic; letter-spacing: .08em; color: var(--soft); font-size: 18px; }
+.hero h1 { font-family: var(--f-script); font-weight: 400; font-size: clamp(64px, 18vw, 124px); line-height: 1.2; margin: 0; padding: 0 .3em; color: var(--rose-deep); text-wrap: balance; }
+.hero .names { font-size: clamp(16px, 4.4vw, 20px); letter-spacing: .32em; text-transform: uppercase; margin: 0; }
+.days { margin-top: 18px; display: grid; justify-items: center; gap: 4px; }
+.days b { font-weight: 500; font-size: clamp(54px, 15vw, 80px); line-height: 1; color: var(--rose-deep); font-variant-numeric: tabular-nums; }
+.days span { font-style: italic; color: var(--soft); font-size: 17px; }
+.cue { margin-top: 18px; font-style: italic; color: var(--soft); font-size: 16px; animation: breathe 2.4s ease-in-out infinite; }
+@keyframes breathe { 50% { opacity: .45; } }
+
+/* Letter */
+.letter { margin: 26px auto 0; max-width: 460px; padding: 10px; border-radius: 28px; background: rgba(255,255,255,.65);
+  box-shadow: 0 0 0 1px rgba(199,110,126,.18), 0 30px 70px -20px rgba(199,110,126,.55); }
+.letter .sheet { background: var(--paper); border-radius: 20px; padding: 30px 26px 26px; text-align: center; }
+.letter .sheet p { margin: 0; font-size: 21px; line-height: 1.55; text-wrap: pretty; }
+.letter .sheet .sign { display: block; margin-top: 14px; font-family: var(--f-script); font-size: 40px; line-height: 1; color: var(--rose-deep); }
+.maple-btn { position: relative; display: block; margin: 10px auto 0; padding: 0; border: none; background: none; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+.maple-btn:focus-visible { outline: 2px solid var(--rose); outline-offset: 4px; border-radius: 20px; }
+.maple { display: block; width: 170px; height: auto; transform-origin: 50% 95%; overflow: visible; }
+.maple .tail { transform-origin: 134px 160px; } .maple .ear-l { transform-origin: 56px 72px; } .maple .ear-r { transform-origin: 144px 72px; }
+.maple-btn.bark .maple { animation: hop .75s cubic-bezier(.3,.7,.3,1); }
+.maple-btn.bark .tail { animation: wag .18s ease-in-out 4 alternate; }
+.maple-btn.bark .ear-l { animation: flopL .75s ease; } .maple-btn.bark .ear-r { animation: flopR .75s ease; }
+@keyframes hop { 0% { transform: none; } 18% { transform: translateY(3px) scale(1.05,.93); } 42% { transform: translateY(-16px) scale(.97,1.05) rotate(-4deg); } 66% { transform: translateY(0) scale(1.04,.96) rotate(3deg); } 84% { transform: translateY(-4px) rotate(-1deg); } 100% { transform: none; } }
+@keyframes wag { from { transform: rotate(-22deg); } to { transform: rotate(22deg); } }
+@keyframes flopL { 40% { transform: rotate(14deg); } 70% { transform: rotate(-6deg); } }
+@keyframes flopR { 40% { transform: rotate(-14deg); } 70% { transform: rotate(6deg); } }
+.woof { position: absolute; left: 4px; top: 18px; padding: 2px 12px 5px; border-radius: 16px 16px 16px 4px; background: var(--paper); color: var(--rose-deep);
+  font-family: var(--f-script); font-size: 26px; line-height: 1.1; box-shadow: 0 0 0 1px rgba(199,110,126,.25), 0 8px 16px -8px rgba(143,63,82,.5); opacity: 0; transform: scale(.4) rotate(-10deg); pointer-events: none; }
+.maple-btn.bark .woof { animation: woof 1.2s cubic-bezier(.3,1.5,.5,1) forwards; }
+@keyframes woof { 0% { opacity: 0; transform: scale(.4) rotate(-10deg); } 18% { opacity: 1; transform: scale(1.08) rotate(-6deg); } 30% { transform: scale(1) rotate(-6deg); } 75% { opacity: 1; transform: translateY(-6px) rotate(-6deg); } 100% { opacity: 0; transform: translateY(-14px) rotate(-6deg); } }
+.pet { display: block; font-style: italic; color: var(--soft); font-size: 15px; margin-top: 2px; }
+.maple .mh { transform-origin: 170px 30px; animation: mh 2.6s ease-in-out infinite; }
+@keyframes mh { 0%,100% { transform: translateY(0) rotate(0); } 50% { transform: translateY(-5px) rotate(6deg); } }
+@media (prefers-reduced-motion: reduce) { .maple .mh, .maple-btn.bark .maple, .maple-btn.bark .tail, .maple-btn.bark .ear-l, .maple-btn.bark .ear-r { animation: none; } }
+
+/* Month index */
+.index { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 10; display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none;
+  padding: 10px max(14px, env(safe-area-inset-left, 0px)); background: rgba(251,239,240,.82); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+  box-shadow: 0 1px 0 rgba(199,110,126,.14); }
+.index::-webkit-scrollbar { display: none; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 11; background: var(--blush); }
+.index a { flex: none; display: inline-flex; align-items: center; gap: 6px; padding: 6px 13px 7px; border-radius: 999px; text-decoration: none;
+  color: var(--ink); font-size: 15px; background: rgba(255,255,255,.6); box-shadow: 0 0 0 1px rgba(199,110,126,.16); transition: background .3s, color .3s; }
+.index a i { width: 7px; height: 7px; border-radius: 50%; background: var(--dot); }
+.index a.on { background: var(--rose); color: #fff; box-shadow: none; }
+.index a.on i { background: #fff; }
+.index a:focus-visible { outline: 2px solid var(--rose-deep); outline-offset: 2px; }
+
+/* First page: one arched photo */
+.arch { background: none; border: none; padding: 0; cursor: zoom-in; display: block; margin: 26px auto 0; width: min(300px, 76vw); }
+.arch .ph { aspect-ratio: 3 / 4; border-radius: 999px 999px 22px 22px; overflow: hidden; background: linear-gradient(170deg, #f3d2d6, #e3aeb8);
+  box-shadow: 0 22px 40px -20px rgba(143,63,82,.6); }
+.arch img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .7s ease; }
+.arch:hover img { transform: scale(1.04); }
+.arch:focus-visible { outline: none; } .arch:focus-visible .ph { outline: 2px solid var(--rose); outline-offset: 4px; }
+.date { font-family: var(--f-serif); font-size: clamp(30px, 8vw, 40px); letter-spacing: .14em; color: var(--rose-deep); margin: 22px 0 0; font-variant-numeric: tabular-nums; }
+
+/* Photo strip */
+.reel { display: flex; align-items: center; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none;
+  padding: 28px max(20px, env(safe-area-inset-left, 0px)) 14px; }
+.reel::-webkit-scrollbar { display: none; }
+.reel.fits { justify-content: center; }
+.shot { flex: none; scroll-snap-align: center; position: relative; border: none; padding: 0; cursor: zoom-in; border-radius: 22px; overflow: hidden;
+  height: min(58vh, 420px); max-width: 84vw; background: linear-gradient(170deg, #f3d2d6, #dca2ae); box-shadow: 0 18px 34px -20px rgba(143,63,82,.6); }
+.shot img { height: 100%; width: 100%; object-fit: cover; display: block; transition: transform .7s ease; }
+.shot:hover img { transform: scale(1.04); }
+.shot:focus-visible { outline: 2px solid var(--rose); outline-offset: 3px; }
+.shot .cap { position: absolute; top: 12px; left: 0; right: 0; margin: 0 auto; width: max-content; max-width: calc(100% - 28px); pointer-events: none;
+  padding: 3px 15px 5px; border-radius: 14px; color: #fff; font-family: var(--f-script); font-size: 24px; line-height: 1.15; text-shadow: 0 1px 10px rgba(143,63,82,.7);
+  background: rgba(255,240,242,.18); -webkit-backdrop-filter: blur(12px) saturate(1.3); backdrop-filter: blur(12px) saturate(1.3);
+  border: 1px solid rgba(255,255,255,.4); box-shadow: 0 8px 20px -10px rgba(0,0,0,.45); }
+.swipe { font-style: italic; color: var(--soft); font-size: 15px; }
+
+/* Ending */
+.end { padding-block: 60px 110px; display: grid; justify-items: center; gap: 6px; }
+.end .ily { font-family: var(--f-script); font-size: clamp(66px, 18vw, 110px); line-height: 1.1; color: var(--rose-deep); margin: 0; }
+.end .arch { margin-top: 10px; }
+.end .tapme { font-style: italic; color: var(--soft); font-size: 16px; margin-top: 12px; }
+.end .heart { border: none; background: none; cursor: pointer; padding: 6px; color: var(--rose); margin-top: 12px; }
+.end .heart svg { width: 34px; height: 34px; display: block; animation: beat 1.6s ease-in-out infinite; }
+.end .heart:focus-visible { outline: 2px solid var(--rose); outline-offset: 4px; border-radius: 50%; }
+@keyframes beat { 0%,100% { transform: scale(1); } 15% { transform: scale(1.18); } 30% { transform: scale(1); } 45% { transform: scale(1.12); } }
+.end .sig { font-size: 16px; letter-spacing: .24em; text-transform: uppercase; color: var(--soft); margin-top: 18px; }
+
+/* Lightbox */
+.lightbox { position: fixed; inset: 0; z-index: 40; background: rgba(74,45,54,.86); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+  display: grid; place-items: center; align-content: center; gap: 14px;
+  padding: max(20px, env(safe-area-inset-top, 0px)) max(20px, env(safe-area-inset-right, 0px)) max(20px, env(safe-area-inset-bottom, 0px)) max(20px, env(safe-area-inset-left, 0px)); }
+.lightbox img { max-width: min(560px, 100%); max-height: 72vh; border-radius: 20px; display: block; box-shadow: 0 30px 60px -20px rgba(0,0,0,.5); }
+.lightbox .lc { color: #fff; font-family: var(--f-script); font-size: 34px; line-height: 1.1; margin: 0; text-align: center; }
+.lightbox .lm { color: rgba(255,255,255,.75); font-size: 13px; letter-spacing: .2em; text-transform: uppercase; margin: 0; font-variant-numeric: tabular-nums; }
+.lb-btn { position: absolute; width: 44px; height: 44px; border-radius: 50%; border: none; background: rgba(255,255,255,.9); color: var(--rose-deep); font-size: 22px; cursor: pointer; display: grid; place-items: center; }
+.lb-btn:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+.lb-x { top: max(16px, env(safe-area-inset-top, 0px)); right: max(16px, env(safe-area-inset-right, 0px)); }
+.lb-prev, .lb-next { top: 50%; transform: translateY(-50%); }
+.lb-prev { left: max(10px, env(safe-area-inset-left, 0px)); } .lb-next { right: max(10px, env(safe-area-inset-right, 0px)); }
+
+/* Sound */
+.mute { position: fixed; z-index: 15; right: max(14px, env(safe-area-inset-right, 0px)); bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+  width: 44px; height: 44px; border-radius: 50%; border: none; cursor: pointer; background: rgba(255,255,255,.8); color: var(--rose-deep);
+  box-shadow: 0 6px 16px -8px rgba(143,63,82,.5); display: grid; place-items: center; -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); }
+.mute svg { width: 20px; height: 20px; }
+.mute:focus-visible { outline: 2px solid var(--rose); outline-offset: 3px; }
+
+/* Reveals: only things below the first view start hidden */
+.rv { transition: opacity 1s ease, transform 1.1s cubic-bezier(.2,.7,.2,1); }
+.rv.pre { opacity: 0; transform: translateY(36px); }
+.reel .shot.rv.pre { transform: translateX(50px); }
+.hero > * { animation: rise 1.1s cubic-bezier(.2,.7,.2,1) both; }
+.hero > *:nth-child(2) { animation-delay: .15s; } .hero > *:nth-child(3) { animation-delay: .3s; } .hero > *:nth-child(4) { animation-delay: .45s; }
+@keyframes rise { from { opacity: .001; transform: translateY(18px); } }
+
+/* Entrance: the book cover */
+html.locked, html.locked body { overflow: hidden; }
+html.locked:not(.entering) .hero > * { animation-play-state: paused; }
+.intro { position: fixed; inset: 0; z-index: 60; display: grid; place-items: center; align-content: center; gap: 26px; background: var(--blush);
+  background-image: radial-gradient(ellipse 60% 45% at 15% 10%, rgba(246,215,218,.95), transparent 70%), radial-gradient(ellipse 55% 45% at 90% 35%, rgba(240,200,210,.7), transparent 70%), radial-gradient(ellipse 70% 50% at 50% 100%, rgba(248,224,214,.9), transparent 70%);
+  padding: max(20px, env(safe-area-inset-top, 0px)) max(20px, env(safe-area-inset-right, 0px)) max(20px, env(safe-area-inset-bottom, 0px)) max(20px, env(safe-area-inset-left, 0px));
+  transition: opacity .9s ease, visibility .9s; perspective: 1400px; }
+.intro.leave { opacity: 0; visibility: hidden; }
+.intro .tap { font-style: italic; color: var(--soft); font-size: 17px; margin: 0; animation: breathe 2.4s ease-in-out infinite; }
+.book { position: relative; width: min(320px, 80vw); aspect-ratio: 1 / 1; max-width: 100%; border: none; padding: 0; cursor: pointer; background: none; transform-style: preserve-3d; }
+.book .inside { position: absolute; inset: 0; background: var(--paper); border-radius: 3px 10px 10px 3px; display: grid; place-content: center; padding: 22px; text-align: center;
+  box-shadow: 0 30px 50px -24px rgba(143,63,82,.6); }
+.book .inside span { font-family: var(--f-script); font-size: clamp(34px, 9vw, 46px); line-height: 1.1; color: var(--rose-deep); }
+.cover { position: absolute; inset: 0; z-index: 2; background: #fff; border-radius: 2px 6px 6px 2px; overflow: hidden; transform-origin: left center; transition: transform 1.3s cubic-bezier(.6,0,.25,1);
+  box-shadow: inset 5px 0 7px -4px rgba(0,0,0,.2), 0 30px 50px -24px rgba(143,63,82,.6); backface-visibility: hidden; container-type: inline-size; }
+/* Frame positions and crops taken from the Mixbook cover layout (percent of the square cover) */
+.cover .f { position: absolute; overflow: hidden; background: #eee; }
+.cover .f img { position: absolute; max-width: none; display: block; }
+.cover .f1 { left: 7.21%; top: 10.91%; width: 62.81%; height: 76.44%; }
+.cover .f1 img { left: 0; top: -4.38%; width: 100%; height: 109.55%; }
+.cover .f2 { left: 72.87%; top: 10.90%; width: 29.30%; height: 43.97%; }
+.cover .f2 img { left: -50.03%; top: 0; width: 200%; height: 100%; }
+.cover .f3 { left: 72.87%; top: 57.73%; width: 29.30%; height: 29.60%; }
+.cover .f3 img { left: -17.35%; top: 0; width: 134.71%; height: 100%; }
+.cover .t { position: absolute; top: 94.4%; transform: translateY(-50%); font-family: "Futura", "Jost", "Century Gothic", "Trebuchet MS", sans-serif; font-size: 3.6cqw; letter-spacing: .04em; color: #000; white-space: nowrap; line-height: 1; }
+.cover .t1 { right: 37.08%; } .cover .t2 { left: 67.8%; }
+.cover .bar { position: absolute; left: 65.08%; top: 91.8%; width: 1px; height: 4.2%; background: #000; }
+.intro.open .cover { transform: rotateY(-165deg); }
+.intro.open .tap { opacity: 0; animation: none; transition: opacity .3s; }
+.book:focus-visible { outline: 2px solid var(--rose-deep); outline-offset: 6px; border-radius: 10px; }
+.intro.leave .book { transform: translateY(-16px) scale(.97); transition: transform .7s ease; }
+
+@media (prefers-reduced-motion: reduce) {
+  .intro .tap, .cue, .end .heart svg { animation: none; }
+  .cover { transition: none; }
+  .rv, .rv.pre, .reel .shot.rv.pre { transition: none; opacity: 1; transform: none; }
+  .hero > * { animation: none; }
+  html { scroll-behavior: auto; }
+  .shot img, .arch img { transition: none; }
+}
+</style>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath fill=%22%23c76e7e%22 d=%22M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z%22/%3E%3C/svg%3E">
+</head>
+<body>
+
+
+<div class="glow" aria-hidden="true"></div>
+<canvas id="hearts" aria-hidden="true"></canvas>
+
+<div class="intro" id="intro">
+  <button class="book" id="book" type="button" aria-label="Open the book">
+    <div class="inside"><span>2 years of us</span></div>
+    <div class="cover">
+      <div class="f f1"><img src="img/g00_1.jpg" alt="Us at the pumpkin patch"></div>
+      <div class="f f2"><img src="img/g00_0.jpg" alt="Us in the lupine field"></div>
+      <div class="f f3"><img src="img/g00_2.jpg" alt="Us above the mountain lake"></div>
+      <span class="t t1">ALJON &amp; ELEINE</span><i class="bar"></i><span class="t t2">2 YEARS</span>
+    </div>
+  </button>
+  <p class="tap">tap the book to open</p>
+</div>
+
+<main>
+  <header class="wrap hero">
+    <span class="to">for Eleine</span>
+    <h1>2 years of us</h1>
+    <p class="names">Aljon &amp; Eleine</p>
+    <div class="days"><b id="dayCount">730</b><span>days together, and counting ♡</span><span class="cue">scroll for our story</span></div>
+  </header>
+
+
+  <nav class="index" id="index" aria-label="Pages of the book"></nav>
+
+  <section class="wrap" id="start">
+    <span class="eyebrow">the day it started</span>
+    <button class="arch rv" type="button" data-src="img/g01_0.jpg" data-cap="11/7/2024">
+      <div class="ph"><img src="img/g01_0.jpg" alt="Our selfie from November 7, 2024" loading="lazy"></div>
+    </button>
+    <p class="date">11/7/2024</p>
+  </section>
+
+  <div id="months"></div>
+
+  <section class="wrap" id="letter">
+    <svg class="divider" viewBox="0 0 120 18" aria-hidden="true"><path d="M0 9h46M74 9h46" stroke="currentColor" stroke-width="1"/><path d="M60 15s-7-4.3-8.8-8.4C49.9 3.6 51.8 1 54.8 1c2 0 3.3 1.1 5.2 2.8C61.9 2.1 63.2 1 65.2 1c3 0 4.9 2.6 3.6 5.6C67 10.7 60 15 60 15z" fill="currentColor"/></svg>
+    <span class="eyebrow">inside the cover</span>
+    <h2>Happy 2 years</h2>
+    <div class="letter rv">
+      <div class="sheet">
+        <p>Happy 2 years my love!! I'm so proud of how far we've come. This year we had some hard moments, but we got through them together, and that made us stronger. You are my best friend. You make me laugh, you always support me, and you make my days better. I cherish every moment we spend together, even the quiet ones. Thank you for loving me and being patient with me. I can't wait to see what the next year brings us. I love you &lt;3</p>
+        <span class="sign">Aljon</span>
+        <button class="maple-btn" id="mapleBtn" type="button" aria-label="Pet Maple">
+        <svg class="maple" viewBox="0 0 200 200" aria-hidden="true">
+          <g class="mh"><path d="M170 46l-2.6-2.4C158.2 35.3 152 29.7 152 22.9 152 17.3 156.4 13 161.9 13c3.1 0 6.1 1.4 8.1 3.7C172 14.4 175 13 178.1 13 183.6 13 188 17.3 188 22.9c0 6.8-6.2 12.4-15.4 20.8z" fill="#c76e7e"/><path d="M161 19.5a5 5 0 0 0-3.6 4.4" stroke="#fff" stroke-width="2.2" stroke-linecap="round" fill="none" opacity=".7"/></g>
+          <ellipse cx="100" cy="189" rx="50" ry="5.5" fill="#c76e7e" opacity=".16"/>
+          <g class="tail" fill="#a3552f"><ellipse cx="140" cy="160" rx="7" ry="6"/><circle cx="147.0" cy="160.0" r="6"/><circle cx="144.4" cy="164.7" r="6"/><circle cx="138.4" cy="165.8" r="6"/><circle cx="133.7" cy="162.6" r="6"/><circle cx="133.7" cy="157.4" r="6"/><circle cx="138.4" cy="154.2" r="6"/><circle cx="144.4" cy="155.3" r="6"/></g>
+          <g fill="#a3552f"><ellipse cx="66" cy="180" rx="13" ry="8"/><ellipse cx="134" cy="180" rx="13" ry="8"/></g>
+          <g fill="#b8693f"><ellipse cx="100" cy="152" rx="33" ry="28"/><circle cx="133.0" cy="152.0" r="8"/><circle cx="130.5" cy="162.7" r="8"/><circle cx="123.3" cy="171.8" r="8"/><circle cx="112.6" cy="177.9" r="8"/><circle cx="100.0" cy="180.0" r="8"/><circle cx="87.4" cy="177.9" r="8"/><circle cx="76.7" cy="171.8" r="8"/><circle cx="69.5" cy="162.7" r="8"/><circle cx="67.0" cy="152.0" r="8"/><circle cx="69.5" cy="141.3" r="8"/><circle cx="76.7" cy="132.2" r="8"/><circle cx="87.4" cy="126.1" r="8"/><circle cx="100.0" cy="124.0" r="8"/><circle cx="112.6" cy="126.1" r="8"/><circle cx="123.3" cy="132.2" r="8"/><circle cx="130.5" cy="141.3" r="8"/></g>
+          <g fill="#b8693f"><rect x="78" y="150" width="20" height="32" rx="10"/><rect x="102" y="150" width="20" height="32" rx="10"/></g>
+          <g fill="#b8693f"><ellipse cx="88" cy="180" rx="9" ry="4"/><circle cx="97.0" cy="180.0" r="4.5"/><circle cx="95.3" cy="182.4" r="4.5"/><circle cx="90.8" cy="183.8" r="4.5"/><circle cx="85.2" cy="183.8" r="4.5"/><circle cx="80.7" cy="182.4" r="4.5"/><circle cx="79.0" cy="180.0" r="4.5"/></g>
+          <g fill="#b8693f"><ellipse cx="112" cy="180" rx="9" ry="4"/><circle cx="121.0" cy="180.0" r="4.5"/><circle cx="119.3" cy="182.4" r="4.5"/><circle cx="114.8" cy="183.8" r="4.5"/><circle cx="109.2" cy="183.8" r="4.5"/><circle cx="104.7" cy="182.4" r="4.5"/><circle cx="103.0" cy="180.0" r="4.5"/></g>
+          <path d="M100 158v24" stroke="#a3552f" stroke-width="2" stroke-linecap="round" opacity=".7"/>
+          <path d="M84 181v4M92 181v4M108 181v4M116 181v4" stroke="#8a4527" stroke-width="1.4" stroke-linecap="round" opacity=".5"/>
+          <g class="ear-l" fill="#a3552f"><ellipse cx="56" cy="92" rx="11" ry="24"/><circle cx="67.0" cy="92.0" r="7"/><circle cx="65.9" cy="102.4" r="7"/><circle cx="62.9" cy="110.8" r="7"/><circle cx="58.4" cy="115.4" r="7"/><circle cx="53.6" cy="115.4" r="7"/><circle cx="49.1" cy="110.8" r="7"/><circle cx="46.1" cy="102.4" r="7"/><circle cx="45.0" cy="92.0" r="7"/><circle cx="46.1" cy="81.6" r="7"/><circle cx="49.1" cy="73.2" r="7"/><circle cx="53.6" cy="68.6" r="7"/><circle cx="58.4" cy="68.6" r="7"/><circle cx="62.9" cy="73.2" r="7"/><circle cx="65.9" cy="81.6" r="7"/></g>
+          <g class="ear-r" fill="#a3552f"><ellipse cx="144" cy="92" rx="11" ry="24"/><circle cx="155.0" cy="92.0" r="7"/><circle cx="153.9" cy="102.4" r="7"/><circle cx="150.9" cy="110.8" r="7"/><circle cx="146.4" cy="115.4" r="7"/><circle cx="141.6" cy="115.4" r="7"/><circle cx="137.1" cy="110.8" r="7"/><circle cx="134.1" cy="102.4" r="7"/><circle cx="133.0" cy="92.0" r="7"/><circle cx="134.1" cy="81.6" r="7"/><circle cx="137.1" cy="73.2" r="7"/><circle cx="141.6" cy="68.6" r="7"/><circle cx="146.4" cy="68.6" r="7"/><circle cx="150.9" cy="73.2" r="7"/><circle cx="153.9" cy="81.6" r="7"/></g>
+          <g fill="#b8693f"><ellipse cx="100" cy="80" rx="42" ry="38"/><circle cx="142.0" cy="80.0" r="9"/><circle cx="139.9" cy="91.7" r="9"/><circle cx="134.0" cy="102.3" r="9"/><circle cx="124.7" cy="110.7" r="9"/><circle cx="113.0" cy="116.1" r="9"/><circle cx="100.0" cy="118.0" r="9"/><circle cx="87.0" cy="116.1" r="9"/><circle cx="75.3" cy="110.7" r="9"/><circle cx="66.0" cy="102.3" r="9"/><circle cx="60.1" cy="91.7" r="9"/><circle cx="58.0" cy="80.0" r="9"/><circle cx="60.1" cy="68.3" r="9"/><circle cx="66.0" cy="57.7" r="9"/><circle cx="75.3" cy="49.3" r="9"/><circle cx="87.0" cy="43.9" r="9"/><circle cx="100.0" cy="42.0" r="9"/><circle cx="113.0" cy="43.9" r="9"/><circle cx="124.7" cy="49.3" r="9"/><circle cx="134.0" cy="57.7" r="9"/><circle cx="139.9" cy="68.3" r="9"/></g>
+          <g fill="#b8693f"><ellipse cx="100" cy="44" rx="16" ry="8"/><circle cx="84.0" cy="44.0" r="7"/><circle cx="86.1" cy="40.0" r="7"/><circle cx="92.0" cy="37.1" r="7"/><circle cx="100.0" cy="36.0" r="7"/><circle cx="108.0" cy="37.1" r="7"/><circle cx="113.9" cy="40.0" r="7"/><circle cx="116.0" cy="44.0" r="7"/></g>
+          <path d="M86 42a5 5 0 0 1 7-2M104 40a5 5 0 0 1 7 2M70 58a5 5 0 0 1 6-3M124 56a5 5 0 0 1 6 3M52 86a5 5 0 0 1 6-1M142 88a5 5 0 0 1 6 0M76 140a5 5 0 0 1 6-2M118 140a5 5 0 0 1 6 1" stroke="#8a4527" stroke-width="1.5" stroke-linecap="round" fill="none" opacity=".45"/>
+          <path d="M74 114q26 12 52 0" stroke="#c76e7e" stroke-width="5" stroke-linecap="round" fill="none"/>
+          <path d="M100 130l-1.3-1.2C94.1 124.6 91 121.8 91 118.4c0-2.8 2.2-5 5-5 1.6 0 3.1.7 4 1.9.9-1.2 2.4-1.9 4-1.9 2.8 0 5 2.2 5 5 0 3.4-3.1 6.2-7.7 10.4z" fill="#e8c26a"/>
+          <ellipse cx="100" cy="94" rx="17" ry="13" fill="#c98457"/>
+          <circle cx="86" cy="80" r="5" fill="#2b1a14"/><circle cx="114" cy="80" r="5" fill="#2b1a14"/><circle cx="87.7" cy="78.2" r="1.7" fill="#fff"/><circle cx="115.7" cy="78.2" r="1.7" fill="#fff"/>
+          <ellipse cx="76" cy="90" rx="5" ry="3" fill="#e89aa6" opacity=".6"/><ellipse cx="124" cy="90" rx="5" ry="3" fill="#e89aa6" opacity=".6"/>
+          <ellipse cx="100" cy="88" rx="6" ry="4.5" fill="#2b1a14"/>
+          <path d="M100 92v3M100 95q-4.5 3.5-8 0M100 95q4.5 3.5 8 0" stroke="#2b1a14" stroke-width="1.7" stroke-linecap="round" fill="none"/><path d="M97.5 97.5q2.5 6 5 0" fill="#e2788a"/>
+        </svg>
+          <span class="woof" aria-hidden="true">woof!</span>
+        </button>
+        <span class="pet">tap Maple ♡</span>
+      </div>
+    </div>
+  </section>
+
+  <footer class="wrap end" id="end">
+    <svg class="divider" viewBox="0 0 120 18" aria-hidden="true"><path d="M0 9h46M74 9h46" stroke="currentColor" stroke-width="1"/><path d="M60 15s-7-4.3-8.8-8.4C49.9 3.6 51.8 1 54.8 1c2 0 3.3 1.1 5.2 2.8C61.9 2.1 63.2 1 65.2 1c3 0 4.9 2.6 3.6 5.6C67 10.7 60 15 60 15z" fill="currentColor"/></svg>
+    <p class="ily">i wuv you</p>
+    <button class="arch rv" type="button" data-src="img/g12_0.jpg" data-cap="i wuv you">
+      <div class="ph"><img src="img/g12_0.jpg" alt="Our goofy selfie" loading="lazy"></div>
+    </button>
+    <button class="heart" id="heartBtn" type="button" aria-label="Send hearts">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+    </button>
+    <span class="tapme">tap the heart</span>
+    <span class="sig">Aljon &amp; Eleine · year three next</span>
+  </footer>
+</main>
+
+<button class="mute" id="muteBtn" type="button" aria-label="Turn sounds off">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9z" fill="currentColor" stroke="none"/><path id="waves" d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/><path id="cross" d="M16 9l5 6M21 9l-5 6" style="display:none"/></svg>
+</button>
+
+<div class="lightbox" id="lightbox" hidden>
+  <button class="lb-btn lb-x" id="lbClose" type="button" aria-label="Close">×</button>
+  <button class="lb-btn lb-prev" id="lbPrev" type="button" aria-label="Previous photo">‹</button>
+  <button class="lb-btn lb-next" id="lbNext" type="button" aria-label="Next photo">›</button>
+  <img id="lbImg" alt="">
+  <p class="lc" id="lbCap"></p>
+  <p class="lm" id="lbMeta"></p>
+</div>
+
+<script>
+const START = "2024-11-07";
+/* Month colours are the ones used for each month's title in the printed book. */
+const MONTHS = [
+  { id: "january", name: "January", dot: "#6672c2",
+    story: "We started the year with late night snacks and a car movie date on top of Promontory. We put on Moana 2 and never even finished it, but it's still one of my favourite nights with you.",
+    photos: [["g02_0", "late-night snacks"], ["g02_1", "Moana 2 on Promontory"], ["g02_2", "we never finished it"]] },
+  { id: "february", name: "February", dot: "#c3542a",
+    story: "Valentine's month! You got your flowers, we went for Korean BBQ, and we had a study date at La Forêt with burgers and matcha.",
+    photos: [["g03_0", "your Valentine's flowers"], ["g03_1", "kbbq night"], ["g03_2", "study date at La Forêt"]] },
+  { id: "march", name: "March", dot: "#b0c266",
+    story: "Study dates at the library. We had our laptops open and pretended to focus, but honestly I just liked being next to you. Even the boring study days were better with you there.",
+    photos: [["g04_0", "library date"], ["g04_1", "I love you (still do)"]] },
+  { id: "april", name: "April", dot: "#eaaccb",
+    story: "Cherry blossom season! We went looking for the pink trees and took so many pictures with the car under them. You looked so pretty with all the flowers behind you.",
+    photos: [["g05_0", "under the blossoms"], ["g05_1", "you in the pink"], ["g05_2", "us being silly"]] },
+  { id: "may", name: "May", dot: "#875534",
+    story: "We got Maple, our first puppy together! You held two puppies at once and looked so happy. We also went to the lupine field, and you looked so pretty in all the purple flowers.",
+    photos: [["g06_0", "baby Maple"], ["g06_1", "two at once"], ["g06_2", "the lupine field"]] },
+  { id: "june", name: "June", dot: "#c5a86c",
+    story: "Summer finally came, and we spent a sunny day out watching the World Cup! It felt like summer had officially started, and it was even more fun because I got to be there with you.",
+    photos: [["g07_0", "World Cup day"], ["g07_1", "real smiles"], ["g07_2", "mirror check"]] },
+  { id: "july", name: "July", dot: "#de9c53",
+    story: "Our first camping trip, and we brought Maple! He squeezed right into the tent with us. We went to Squamish to hike, then did Elk Mountain, which killed our legs.",
+    photos: [["g08_0", "first camping trip"], ["g08_1", "Squamish hike"], ["g08_2", "Elk Mountain"]] },
+  { id: "august", name: "August", dot: "#e0c168",
+    story: "Panorama Ridge! I almost passed out, and you were right there for me. The views of Garibaldi Lake were so beautiful. We also kissed at the top of Pump Peak.",
+    photos: [["g09_0", "the boardwalk"], ["g09_1", "kiss at Pump Peak"], ["g09_2", "lead the way"], ["g09_4", "Panorama Ridge"], ["g09_5", "Garibaldi Lake"], ["g09_3", "treasure hunting"]] },
+  { id: "september", name: "September", dot: "#5fa148",
+    story: "We went exploring in Fort Langley, then finally did our dream hike, Mt. Cheam! We also went to our last ever night market, where we spent too much and ate way too much food.",
+    photos: [["g10_0", "Fort Langley"], ["g10_1", "Mt. Cheam"], ["g10_2", "last ever night market"]] },
+  { id: "october", name: "October", dot: "#ff8800",
+    story: "Our first concert together, Bruno Mars! It was so fun, and I loved getting dressed up and going with you. We also went to the pumpkin patch to get in the fall mood.",
+    photos: [["g11_0", "Bruno Mars night"], ["g11_1", "our first concert"], ["g11_2", "pumpkin patch"]] }
+];
+const SIZES = {g02_0:[1100,733],g02_1:[733,1100],g02_2:[733,1100],g03_0:[733,1100],g03_1:[733,1100],g03_2:[1100,825],g04_0:[825,1100],g04_1:[768,1100],g05_0:[1100,733],g05_1:[733,1100],g05_2:[619,1100],g06_0:[733,1100],g06_1:[825,1100],g06_2:[1100,825],g07_0:[825,1100],g07_1:[1100,825],g07_2:[825,1100],g08_0:[825,1100],g08_1:[1100,825],g08_2:[1100,737],g09_0:[1100,825],g09_1:[825,1100],g09_2:[825,1100],g09_3:[733,1100],g09_4:[1100,825],g09_5:[1100,825],g10_0:[733,1100],g10_1:[1100,825],g10_2:[825,1100],g11_0:[825,1100],g11_1:[1100,825],g11_2:[825,1100]};
+
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const $ = id => document.getElementById(id);
+
+/* Days together */
+(function () {
+  const start = new Date(START + "T00:00:00");
+  const tick = () => { $("dayCount").textContent = Math.floor((Date.now() - start) / 86400000).toLocaleString(); };
+  tick(); setInterval(tick, 60000);
+})();
+
+/* Build chapters */
+const ALL = [];   // every photo in book order, for the lightbox
+ALL.push({ src: "img/g01_0.jpg", cap: "11/7/2024", meta: "the first page" });
+$("months").innerHTML = MONTHS.map((m, mi) => {
+  const shots = m.photos.map(([f, cap]) => {
+    const [w, h] = SIZES[f]; const i = ALL.length;
+    ALL.push({ src: `img/${f}.jpg`, cap, meta: m.name + " 2026" });
+    return `<button class="shot rv" type="button" data-i="${i}" style="aspect-ratio:${w}/${h}"><img src="img/${f}.jpg" alt="${cap}" width="${w}" height="${h}" loading="lazy"><span class="cap">${cap}</span></button>`;
+  }).join("");
+  return `<section id="${m.id}" style="--dot:${m.dot}">
+    <div class="wrap">
+      <span class="eyebrow"><i></i>page ${mi + 2} · ${m.name} 2026</span>
+      <h2 class="rv">${m.name}</h2>
+      <p class="story rv">${m.story}</p>
+    </div>
+    <div class="reel">${shots}</div>
+    <div class="wrap"><span class="swipe">swipe ♡ tap to see it bigger</span></div>
+  </section>`;
+}).join("");
+ALL.push({ src: "img/g12_0.jpg", cap: "i wuv you", meta: "the last page" });
+
+$("index").innerHTML = `<a href="#start" style="--dot:var(--rose)"><i></i>11/7</a>` +
+  MONTHS.map(m => `<a href="#${m.id}" style="--dot:${m.dot}"><i></i>${m.name.slice(0, 3)}</a>`).join("") +
+  `<a href="#letter" style="--dot:var(--rose)"><i></i>letter</a><a href="#end" style="--dot:var(--rose)"><i></i>♡</a>`;
+
+/* Centre a strip when its photos all fit */
+function fitReels() { document.querySelectorAll(".reel").forEach(r => r.classList.toggle("fits", r.scrollWidth <= r.clientWidth + 1)); }
+addEventListener("resize", fitReels); requestAnimationFrame(fitReels);
+
+/* Highlight the current month in the index */
+const links = [...$("index").querySelectorAll("a")];
+const watch = ["start", ...MONTHS.map(m => m.id), "letter", "end"].map(id => $(id));
+(function () {
+  const io2 = new IntersectionObserver(es => es.forEach(e => {
+    if (!e.isIntersecting) return;
+    links.forEach(a => a.classList.toggle("on", a.getAttribute("href") === "#" + e.target.id));
+    const on = $("index").querySelector(".on");
+    if (on) $("index").scrollTo({ left: on.offsetLeft - $("index").clientWidth / 2 + on.clientWidth / 2, behavior: reduce ? "auto" : "smooth" });
+  }), { rootMargin: "-45% 0px -50% 0px" });
+  watch.forEach(el => io2.observe(el));
+})();
+
+/* Scroll reveals: only below the fold */
+(function () {
+  if (reduce || !("IntersectionObserver" in window)) return;
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.remove("pre"); io.unobserve(e.target); } }), { threshold: .12 });
+  document.querySelectorAll(".rv").forEach(el => {
+    const r = el.getBoundingClientRect();
+    if (r.top > innerHeight * .95 || r.left > innerWidth) { el.classList.add("pre"); io.observe(el); }
+  });
+})();
+
+/* Lightbox */
+let cur = 0;
+function show(i) {
+  cur = (i + ALL.length) % ALL.length; const p = ALL[cur];
+  $("lbImg").src = p.src; $("lbImg").alt = p.cap; $("lbCap").textContent = p.cap; $("lbMeta").textContent = p.meta;
+}
+function openLb(i) { show(i); $("lightbox").hidden = false; sfx.tap(); }
+const closeLb = () => { if (!$("lightbox").hidden) sfx.close(); $("lightbox").hidden = true; };
+document.addEventListener("click", e => {
+  const s = e.target.closest(".shot"); if (s) return openLb(+s.dataset.i);
+  const a = e.target.closest(".arch"); if (a) return openLb(ALL.findIndex(p => p.src === a.dataset.src));
+});
+$("lbClose").onclick = closeLb;
+$("lbPrev").onclick = () => { show(cur - 1); sfx.page(); };
+$("lbNext").onclick = () => { show(cur + 1); sfx.page(); };
+$("lightbox").addEventListener("click", e => { if (e.target === $("lightbox")) closeLb(); });
+addEventListener("keydown", e => {
+  if ($("lightbox").hidden) return;
+  if (e.key === "Escape") closeLb(); else if (e.key === "ArrowLeft") $("lbPrev").click(); else if (e.key === "ArrowRight") $("lbNext").click();
+});
+(function () {
+  let x0 = null;
+  $("lightbox").addEventListener("touchstart", e => { x0 = e.touches[0].clientX; }, { passive: true });
+  $("lightbox").addEventListener("touchend", e => {
+    if (x0 === null) return; const dx = e.changedTouches[0].clientX - x0; x0 = null;
+    if (Math.abs(dx) > 50) (dx < 0 ? $("lbNext") : $("lbPrev")).click();
+  });
+})();
+
+/* Soft sound effects (synthesized, no files) */
+const sfx = (function () {
+  let ctx, master, muted = false;
+  try { muted = localStorage.getItem("book-muted") === "1"; } catch (e) {}
+  function init() {
+    if (ctx) { if (ctx.state === "suspended") ctx.resume(); return true; }
+    const AC = window.AudioContext || window.webkitAudioContext; if (!AC) return false;
+    ctx = new AC(); master = ctx.createGain(); master.gain.value = .32; master.connect(ctx.destination); return true;
+  }
+  function tone(freq, at, dur, vol = .5, type = "sine", glideTo) {
+    const t = ctx.currentTime + at, o = ctx.createOscillator(), g = ctx.createGain();
+    o.type = type; o.frequency.setValueAtTime(freq, t); if (glideTo) o.frequency.exponentialRampToValueAtTime(glideTo, t + dur * .6);
+    g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(vol, t + .012); g.gain.exponentialRampToValueAtTime(.0001, t + dur);
+    o.connect(g); g.connect(master); o.start(t); o.stop(t + dur + .05);
+  }
+  function paper(at, dur = .45, vol = .35) {
+    const t = ctx.currentTime + at, len = Math.floor(ctx.sampleRate * dur), buf = ctx.createBuffer(1, len, ctx.sampleRate), d = buf.getChannelData(0);
+    for (let i = 0; i < len; i++) d[i] = (Math.random() * 2 - 1) * (1 - i / len) * (.6 + .4 * Math.sin(i / 900));
+    const src = ctx.createBufferSource(), f = ctx.createBiquadFilter(), g = ctx.createGain();
+    src.buffer = buf; f.type = "bandpass"; f.frequency.value = 2600; f.Q.value = .8; g.gain.value = vol;
+    src.connect(f); f.connect(g); g.connect(master); src.start(t);
+  }
+  const play = fn => () => { if (muted || !init()) return; fn(); };
+  return {
+    open: play(() => { paper(0, .7, .35); [1318.5, 1661.2, 1975.5, 2637].forEach((f, i) => tone(f, .9 + i * .13, 1.3, .16, "triangle")); }),
+    page: play(() => paper(0, .3, .25)),
+    tap: play(() => { tone(1568, 0, .35, .18, "triangle"); tone(2093, .07, .4, .12, "sine"); }),
+    close: play(() => tone(900, 0, .16, .14, "sine", 600)),
+    bark: play(() => {
+      [0, .2].forEach((at, k) => {
+        const t = ctx.currentTime + at, o = ctx.createOscillator(), f = ctx.createBiquadFilter(), g = ctx.createGain();
+        const p = k ? 1.12 : 1;
+        o.type = "sawtooth";
+        o.frequency.setValueAtTime(600 * p, t); o.frequency.exponentialRampToValueAtTime(1150 * p, t + .035); o.frequency.exponentialRampToValueAtTime(480 * p, t + .14);
+        f.type = "bandpass"; f.frequency.setValueAtTime(1500, t); f.Q.value = 1.1;
+        g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(.6, t + .01); g.gain.exponentialRampToValueAtTime(.001, t + .16);
+        o.connect(f); f.connect(g); g.connect(master); o.start(t); o.stop(t + .2);
+        paper(at, .05, .3);
+      });
+      [1568, 2093].forEach((fr, i) => tone(fr, .45 + i * .1, .6, .08, "triangle"));
+    }),
+    love: play(() => [1046.5, 1318.5, 1568, 2093, 2637].forEach((f, i) => tone(f, i * .11, 1.4, .15, "triangle"))),
+    get muted() { return muted; },
+    set muted(v) { muted = v; try { localStorage.setItem("book-muted", v ? "1" : "0"); } catch (e) {} }
+  };
+})();
+function paintMute() {
+  $("waves").style.display = sfx.muted ? "none" : ""; $("cross").style.display = sfx.muted ? "" : "none";
+  $("muteBtn").setAttribute("aria-label", sfx.muted ? "Turn sounds on" : "Turn sounds off");
+}
+$("muteBtn").onclick = () => { sfx.muted = !sfx.muted; paintMute(); if (!sfx.muted) sfx.tap(); };
+paintMute();
+
+/* Drifting hearts + bursts */
+const hearts = (function () {
+  const cv = $("hearts"), cx = cv.getContext("2d"); let W, H, dpr, list = [];
+  function size() { dpr = Math.min(2, devicePixelRatio || 1); W = innerWidth; H = innerHeight; cv.width = W * dpr; cv.height = H * dpr; cx.setTransform(dpr, 0, 0, dpr, 0, 0); }
+  size(); addEventListener("resize", size);
+  function heart(x, y, s, a, c) {
+    cx.save(); cx.translate(x, y); cx.scale(s / 24, s / 24); cx.globalAlpha = a; cx.fillStyle = c;
+    cx.beginPath(); cx.moveTo(12, 21); cx.bezierCurveTo(2, 14, 0, 9, 3.5, 5); cx.bezierCurveTo(6.5, 2, 10.5, 3, 12, 6.5);
+    cx.bezierCurveTo(13.5, 3, 17.5, 2, 20.5, 5); cx.bezierCurveTo(24, 9, 22, 14, 12, 21); cx.fill(); cx.restore();
+  }
+  const cols = ["#c76e7e", "#e4aab4", "#f2c4cb", "#d98a99"];
+  function drift() { return { x: Math.random() * W, y: H + 20, vy: -(.2 + Math.random() * .35), vx: 0, s: 8 + Math.random() * 10, a: .18 + Math.random() * .2, c: cols[Math.random() * 4 | 0], t: Math.random() * 6, life: Infinity }; }
+  if (!reduce) for (let i = 0; i < 12; i++) { const h = drift(); h.y = Math.random() * H; list.push(h); }
+  function burst(x, y, n = 26) {
+    if (reduce) return;
+    for (let i = 0; i < n; i++) { const ang = -Math.PI / 2 + (Math.random() - .5) * 2.2, sp = 2 + Math.random() * 4;
+      list.push({ x, y, vx: Math.cos(ang) * sp, vy: Math.sin(ang) * sp, s: 12 + Math.random() * 16, a: .9, c: cols[Math.random() * 4 | 0], t: 0, life: 90 + Math.random() * 40, g: .06 }); }
+  }
+  function frame() {
+    cx.clearRect(0, 0, W, H);
+    list = list.filter(h => {
+      h.t += .02; h.x += h.vx + (h.life === Infinity ? Math.sin(h.t) * .3 : 0); h.y += h.vy; if (h.g) { h.vy += h.g; h.vx *= .99; }
+      if (h.life !== Infinity) { h.life--; h.a = Math.min(.9, h.life / 60); }
+      if (h.life === Infinity && h.y < -30) Object.assign(h, drift());
+      heart(h.x, h.y, h.s, h.a, h.c);
+      return h.life > 0;
+    });
+    requestAnimationFrame(frame);
+  }
+  if (!reduce) requestAnimationFrame(frame);
+  return { burst };
+})();
+
+$("mapleBtn").onclick = e => {
+  const b = e.currentTarget; b.classList.remove("bark"); void b.offsetWidth; b.classList.add("bark");
+  sfx.bark();
+  const r = b.getBoundingClientRect(); hearts.burst(r.left + r.width * .5, r.top + r.height * .35, 14);
+};
+$("heartBtn").onclick = e => {
+  const r = e.currentTarget.getBoundingClientRect();
+  hearts.burst(r.left + r.width / 2, r.top + r.height / 2, 34); sfx.love();
+};
+
+/* Entrance: open the book */
+(function () {
+  const intro = $("intro"), book = $("book"), root = document.documentElement;
+  let seen = false; try { seen = sessionStorage.getItem("book-opened") === "1"; } catch (e) {}
+  if (seen) { intro.remove(); return; }
+  root.classList.add("locked");
+  book.addEventListener("click", () => {
+    if (intro.classList.contains("open")) return;
+    intro.classList.add("open"); sfx.open();
+    try { sessionStorage.setItem("book-opened", "1"); } catch (e) {}
+    setTimeout(() => {
+      root.classList.add("entering"); intro.classList.add("leave");
+      const r = book.getBoundingClientRect(); hearts.burst(r.left + r.width / 2, r.top + r.height / 2, 30);
+      setTimeout(() => { root.classList.remove("locked"); intro.remove(); }, 900);
+    }, reduce ? 200 : 1500);
+  });
+})();
+</script>
+
+</body>
+</html>
